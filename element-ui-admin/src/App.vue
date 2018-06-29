@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <comments></comments>
+    <article-table></article-table>
+    <!-- <comments></comments> -->
     <!-- <login></login>
     <p v-text="content"></p>
     <p v-html="content"></p> -->
@@ -22,12 +23,14 @@ import MD from "@/views/md";
 import EleRadioGroup from '@/components/ele-radio-group'
 import EleRadio from '@/components/ele-radio'
 import comments from '@/components/comments'
+import ArticleTable from '@/views/articleTable'
 export default {
   name: "App",
   data() {
     return {
       sex: 0,
-      content: "<span>拼多多，拼多多，拼的多，省得多。</span>"
+      content: "<span>拼多多，拼多多，拼的多，省得多。</span>",
+      list: []
     };
   },
   components: {
@@ -36,7 +39,16 @@ export default {
     markd: MD,
     EleRadioGroup,
     EleRadio,
-    comments
+    comments,
+    ArticleTable
+  },
+  methods: {
+    getList(){
+
+    }
+  },
+  mounted(){
+    
   }
 };
 </script>

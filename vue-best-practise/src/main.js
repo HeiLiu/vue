@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
 import VueResource from 'vue-resource'
+import EventProxy from 'vue-event-proxy'
 import store from './store'
 
 Vue.use(VueResource)
 Vue.use(store)
+Vue.use(EventProxy)
 
 Vue.config.productionTip = false
 

@@ -3,9 +3,21 @@
         <!-- HeadTop -->
         <header class="head_top">
             <slot name="logo"/>
-            <router-link class="head_login" :to="userInfo?'/profile':'/login'">
+            <slot name="search"/>
+            <section class="head_goback" v-if="goback" @click="$router.go(-1)">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <polyline points="12, 18 4, 9 12, 0" style="fill: none;stroke: rgb(255,255,255);stroke-width:2"/>
+                     <polyline points="12, 18 9, 9 12, 0" style="fill: none;stroke: rgb(255,255,255);stroke-width:2"/>
+                </svg> 
+            </section>
+            <router-link class="head_login" :to="userInfo?'/profile':'/login'" v-if="signinUP">
                 <span class="login_span" v-if="!userInfo">登录|注册</span>
             </router-link>
+            <section class="title_head ellipsis" v-if="headTitle">
+                <span class="title_text">{{headTitle}}</span>
+            </section>
+            <slot name="changecity"/>
+            <slot name="msite-title"/>
         </header>
       
     </div>
@@ -14,11 +26,15 @@
 <script>
 import { mapState } from "vuex";
 export default {
+    props: ['signinUP','goback','headTitle'],
   //  将state放在computed中
   computed: {
     //   mapState 返回的是一个state 的JSON列表
     //  ... 将新的state json 展开到computed json里去
     ...mapState(["userInfo"])
+  },
+  methods: {
+
   }
 };
 </script>
@@ -43,12 +59,26 @@ export default {
     wh(100%, 1.95rem);
 }
 
+.head_goback
+    left .4em
+    wh(.6rem, 1rem)
+    line-height 2.2rem
+    margin-left .4rem
 .head_login {
     right: 0.55rem;
     sc(0.65rem, #fff);
     ct();
 }
 
+.title_head
+    center()
+    width 50%
+    color #ffffff
+    text-align center
+    .text_text
+        sc(.8rem, #fff)
+        text-align center
+        font-weight bold
 .login_span {
     color: #ffffff;
 }

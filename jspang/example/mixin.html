@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mixin 实例</title>
+</head>
+
+<body>
+  <div id="app">
+    {{num}}
+    <p><button @click ="add">add</button></p>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  <script>
+    var addConsole = {
+      // 生命周期
+      updated: function conso() {
+        console.log('数据发生变化，变成了'+ this.num)
+      }
+    }
+    // 全局的混入  
+    Vue.mixin({
+      updated: function() {
+        console.log('我是全局的混入')
+      }
+    })
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        num: 2
+      },
+      conponents: {
+
+      },
+      methods: {
+        add() {
+          this.num += 1
+        }
+      },
+      updated() {
+        // 混入的比原生的生命周期先执行
+        console.log('我是生命周期，看看我和混入那小子谁更快一点')
+      },
+      mixins: [addConsole]
+
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mixin 实例</title>
+</head>
+
+<body>
+  <div id="app">
+    {{num}}
+    <p><button @click ="add">add</button></p>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  <script>
+    var extendsObj = {
+      updated: function () {
+        console.log("我是扩展的update")
+      }
+    }
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        num: 2
+      },
+      conponents: {
+
+      },
+      methods: {
+        add: function () {
+          console.log("我是原生的方法")
+          this.num++
+        }
+      },
+      updated() {
+        console.log('听说又来了一个扩展跑的比我还要快 让我们原生的咋办呀')
+      },
+      extends: extendsObj
+    })
+  </script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <head-top sign-up="home">
+        <head-top signinUP="home">
             <span>default</span>
             <span slot="logo" class="head_logo">ele.me</span>
         </head-top>
@@ -16,7 +16,7 @@
         <section id="hot_city_container">
             <h4 class="city_title">热门城市</h4>
             <ul class="cityListul clear">
-                <router-link :to="'/city'+item.id" v-for="item in hotCity" :key="item.id" tag="li">
+                <router-link :to="'/city/' + item.id" v-for="item in hotCity" :key="item.id" tag="li">
                     {{item.name}}
                 </router-link>
             </ul>
@@ -38,20 +38,15 @@ export default {
   components: {
     HeadTop
   },
-  mounted() {
+ async mounted() {
     //  城市？ 不准确，又耗时的api 可能会阻塞组件的渲染 在组件挂载之后再请求
-    cityGuess()
-      .then(res => res.json())
-      .then(data => {
-        this.guessCityId = data.id;
-        this.guessCity = data.name;
-        console.log(data)
-      });
-    hotCity()
-      .then(res => res.json())
-      .then(data => {
-          this.hotCity = data
-      })
+  const cityData = await cityGuess()
+  console.log(cityData)
+  this.guessCityId = cityData.id
+  this.guessCity = cityData.name
+
+  const hotCityData = await hotCity()
+    this.hotCity = hotCityData
   }
 };
 </script>

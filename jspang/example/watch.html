@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>watch 实例</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>今日温度： {{wendu}} °</p>
+    <p>穿衣建议: {{suggestion}} </p>
+    <p><button @click="add">升高温度</button> <button @click="descrease">jiangdiwendu</button></p>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        wendu: 14,
+        suggestion: '夹克长裙'
+      },
+      conponents: {
+
+      },
+      methods: {
+        add() {
+          this.wendu += 5
+        },
+        descrease() {
+          this.wendu -= 5
+        }
+      },
+      // watch : {
+      //   wendu: function (newVal, oldVal){
+      //     if(newVal >= 28 ) {
+      //       this.suggestion = 'T恤短袖'
+      //     } else if(newVal > 0 && newVal < 28) {
+      //       this.suggestion = '夹克长裙'
+      //     } else {
+      //       this.suggestion = '棉袄毛衣'
+      //     }
+      //   }
+      // }
+
+    })
+    // 在外面通过给实例的 $watch 添加属性的监控
+    vm.$watch('wendu', function (newVal, oldVal) {
+          if(newVal >= 28 ) {
+            this.suggestion = 'T恤短袖'
+          } else if(newVal > 0 && newVal < 28) {
+            this.suggestion = '夹克长裙'
+          } else {
+            this.suggestion = '棉袄毛衣'
+          }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <article-table></article-table>
+    <!-- <article-table></article-table> -->
+    <ele-alert title="alert弹窗源码" type="success" center v-if="hasErr" @close="doAlertClose" show-icon></ele-alert>
     <!-- <comments></comments> -->
     <!-- <login></login>
     <p v-text="content"></p>
@@ -24,16 +25,19 @@ import EleRadioGroup from '@/components/ele-radio-group'
 import EleRadio from '@/components/ele-radio'
 import comments from '@/components/comments'
 import ArticleTable from '@/views/articleTable'
+import EleAlert from '@/components/eleAlert'
 export default {
   name: "App",
   data() {
     return {
+      hasErr: false,
       sex: 0,
       content: "<span>拼多多，拼多多，拼的多，省得多。</span>",
       list: []
     };
   },
   components: {
+    EleAlert,
     Login: Login,
     markdown: MarkDown,
     markd: MD,
@@ -45,10 +49,15 @@ export default {
   methods: {
     getList(){
 
+    },
+    doAlertClose(){
+      console.log('close');
     }
   },
   mounted(){
-    
+    setTimeout(()=>{
+      this.hasErr = true
+    },2000)
   }
 };
 </script>

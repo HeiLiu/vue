@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>V-model实例</title>
+</head>
+
+<body>
+    <div id="app">
+        {{message}}
+        <br>
+        <p>V-model:
+            <input type="text" v-model="message">
+        </p>
+        <!-- lazy 懒加载 当鼠标焦点移开文本框时再将数据改变 有点类似与防抖 -->
+        <p>V-model.lazy:
+            <input type="text" v-model.lazy="message">
+        </p>
+        <p>V-model.number:
+            <input type="text" v-model.number="message">
+        </p>
+        <p>V-model.trim:
+            <input type="text" v-model.trim="message">
+        </p>
+        <hr>
+        <h3>文本域</h3>
+        <textarea cols="30" rows="10" v-model="message"></textarea>
+        <hr>
+        <h3>多选框</h3>
+        <p>
+            <label>
+                <input type="checkbox" value="前端工程师" v-model="jobs">前端工程师
+            </label>
+            <label>
+                <input type="checkbox" value="清洁工" v-model="jobs">清洁工
+            </label>
+            <label>
+                <input type="checkbox" value="保安" v-model="jobs">保安
+            </label>
+        </p>
+        <p>{{jobs}}</p>
+        <h3>单选框绑定</h3>
+        <p>
+            <label>
+                <input type="radio" value="男" v-model="sex">男</label>
+            <label>
+                <input type="radio" value="女" v-model="sex">女</label>
+        </p>
+        <p>你选择的性别是：{{sex}}</p>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello World',
+                isTrue: true,
+                jobs: [],
+                sex: '男'
+            }
+        })
+    </script>
+</body>
+
+</html>
